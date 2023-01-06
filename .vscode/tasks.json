@@ -7,10 +7,10 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
+                "*.c",
                 "libft/libft.a",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "so_long"
             ],
             "options": {
                 "cwd": "${fileDirname}"

@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 13:57:32 by sdeeyien          #+#    #+#             */
-/*   Updated: 2022/11/27 00:09:50 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/05 10:15:34 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-# include "libft/libft.h"
+# include "libft.h"
 
 int	ft_printf(char const *fstr, ...);
 int	putnbr(int n, int fd, unsigned int flag);

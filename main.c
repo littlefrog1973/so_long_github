@@ -6,19 +6,23 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 11:12:45 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/04 15:39:01 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/06 16:41:04 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include "libft/libft.h"
+#include "so_long.h"
 
-void err_exit(char **map, t_list **map_list_ptr, int err_no)
+void blank(void *a)
 {
-	ft_lstclear(map_list_ptr, free);
+	a = a + 0;
+}
+
+void err_exit(char **map, int err_no)
+{	int	i;
+
+	i = 0;
+	while (map[i])
+		free(map[i++]);
 	free(map);
 	if (err_no == 0)
 		return ;
@@ -32,6 +36,10 @@ void err_exit(char **map, t_list **map_list_ptr, int err_no)
 		ft_printf("Error\nMap is not rectangular. or closed.\n");
 	if (err_no == 5)
 		ft_printf("Error\nMap has no collectible.\n");
+	if (err_no == 6)
+		ft_printf("Error\nMap has no valid path.\n");
+	if (err_no == 7)
+		ft_printf("Error\nOut of memory\n");
 	exit(1);
 }
 
@@ -84,46 +92,55 @@ int chk_wall(char **map)
 	is_closed &= count_chr(map[0], '1') && (int) ft_strlen(map[0]);
 	return (is_closed);
 }
-
-void chk_map(char **map, t_list **map_list_ptr)
+void chk_map_detail(char **map, int *n_ext, int *n_col, int *n_str)
 {
 	int	i;
 	int	j;
+
+	*n_ext = 0;
+	*n_col = 0;
+	*n_str = 0;
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (!ft_strchr("01CEP", map[i][j]))
+				err_exit(map, 1);
+			*n_ext += ('E' == map[i][j]);
+			*n_col += ('C' == map[i][j]);
+			*n_str += ('P' == map[i][j]);
+			j++;
+		}
+		i++;
+	}
+}
+
+void chk_map(char **map)
+{
 	int	no_exit;
 	int	no_collect;
 	int	no_start;
 
-	no_exit = 0;
-	no_collect = 0;
-	no_start = 0;
-	i = 0;
 	if (chk_rectan(map) && chk_wall(map))
 	{
-		while (map[i])
-		{
-			j = 0;
-			while (map[i][j])
-			{
-				if (!ft_strchr("01CEP", map[i][j]))
-					err_exit(map, map_list_ptr, 1);
-				no_exit += ('E' == map[i][j]);
-				no_collect += ('C' == map[i][j]);
-				no_start += ('P' == map[i][j]);
-				j++;
-			}
-			i++;
-		}
+		chk_map_detail(map, &no_exit, &no_collect, &no_start);
 		if (no_exit == 1 && no_start == 1 && no_collect >= 1)
+		{
+			if (chk_path(map))
+				err_exit(map, 6);
 			return ;
+		}
 		else if (no_exit >= 2 || no_start >= 2)
-			err_exit(map, map_list_ptr, 2);
+			err_exit(map, 2);
 		else if (no_collect == 0)
-			err_exit(map, map_list_ptr, 5);
+			err_exit(map, 5);
 		else
-			err_exit(map, map_list_ptr, 3);
+			err_exit(map, 3);
 	}
 	else
-		err_exit(map, map_list_ptr, 4);
+		err_exit(map, 4);
 }
 
 t_list **read_file(int argc, char *argv[], t_list **map_list_ptr)
@@ -142,15 +159,6 @@ t_list **read_file(int argc, char *argv[], t_list **map_list_ptr)
 			{
 				ft_lstadd_back(map_list_ptr, ft_lstnew(get_next_line(fd)));
 			}
-/*			if (map_list->content == NULL)
-				exit (1);
-			while (1)
-			{
-				ft_lstadd_back(map_list_ptr, ft_lstnew(get_next_line(fd)));
-				if (!ft_lstlast(*map_list_ptr)->content)
-					break;
-			}
-*/
 			if (!map_list->content)
 			{
 				free(map_list);
@@ -189,6 +197,7 @@ char **parse_map(int argc, char *argv[], t_list **map_list_ptr)
 		i++;
 	}
 	map_array[i] = NULL;
+	ft_lstclear(map_list_ptr, blank);
 	return (map_array);
 }
 
@@ -200,13 +209,13 @@ int	main(int argc, char *argv[])
 
 	i = 0;
 	map = parse_map(argc, argv, &map_list_ptr);
-	chk_map(map, &map_list_ptr);
+	chk_map(map);
 
 	while (map[i])
 	{
 		ft_printf("parsed map[%d] = %s\n", i, map[i]);
 		i++;
 	}
-	err_exit(map, &map_list_ptr, 0);
+	err_exit(map, 0);
 	return (0);
 }
