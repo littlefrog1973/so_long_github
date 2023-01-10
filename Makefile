@@ -6,18 +6,19 @@
 #    By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 12:25:01 by sdeeyien          #+#    #+#              #
-#    Updated: 2023/01/05 10:23:25 by sdeeyien         ###   ########.fr        #
+#    Updated: 2023/01/10 15:18:33 by sdeeyien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
+MLXFLAGS = -lmlx -lXext -lX11
 
 LIBDIR = libft
 
 DEPS = so_long.h
 
-SRC = main.c chk_path.c
+SRC = main.c chk_path.c mlx_call.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -27,7 +28,7 @@ all : $(NAME)
 
 $(NAME): $(OBJ)
 	cd $(LIBDIR) && make
-	$(CC) -o $@ $(OBJ) $(LIBDIR)/$(LIBDIR).a
+	$(CC) -o $@ $(OBJ) $(LIBDIR)/$(LIBDIR).a $(MLXFLAGS)
 
 %.o: %.c $(DEPS)
 	$(CC) -c $< $(DEPS) $(CFLAGS)

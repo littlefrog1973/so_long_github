@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 09:57:48 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/06 14:05:34 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:21:32 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,14 @@ void chk_map(char **map);
 t_list **read_file(int argc, char *argv[], t_list **map_list_ptr);
 char **parse_map(int argc, char *argv[], t_list **map_list_ptr);
 int chk_path(char **map);
+
+typedef	struct s_data {
+	void	*img;
+	char	*addr;
+	int	bits_per_pixel;
+	int	line_length;
+	int	endian;
+}	t_data;
+int mlx_call(char **map);
 
 #endif

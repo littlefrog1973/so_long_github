@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 11:12:45 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/06 16:41:04 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:08:14 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void err_exit(char **map, int err_no)
 	while (map[i])
 		free(map[i++]);
 	free(map);
+//	perror("In err_exit\n");
 	if (err_no == 0)
 		return ;
 	if (err_no == 1)
@@ -205,17 +206,10 @@ int	main(int argc, char *argv[])
 {
 	char	**map;
 	t_list	*map_list_ptr;
-	int	i;
 
-	i = 0;
 	map = parse_map(argc, argv, &map_list_ptr);
 	chk_map(map);
-
-	while (map[i])
-	{
-		ft_printf("parsed map[%d] = %s\n", i, map[i]);
-		i++;
-	}
+	mlx_call(map);
 	err_exit(map, 0);
 	return (0);
 }
