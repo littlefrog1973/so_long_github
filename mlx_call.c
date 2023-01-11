@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:14:28 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/11 04:30:50 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/11 09:31:46 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int mlx_call(char **map)
 	wall.img = mlx_xpm_file_to_image(mlx,"./tree_on_tile.xpm", &wall_x, &wall_y);
 	wizard.img = mlx_xpm_file_to_image(mlx,"./wizard_on_tile.xpm", &wall_x, &wall_y);
 	key.img = mlx_xpm_file_to_image(mlx,"./key_on_tile.xpm", &wall_x, &wall_y);
-	door.img = mlx_xpm_file_to_image(mlx,"./door.xpm", &wall_x, &wall_y);
+	door.img = mlx_xpm_file_to_image(mlx,"./door_on_tile.xpm", &wall_x, &wall_y);
 	tile.img = mlx_xpm_file_to_image(mlx,"./tile.xpm", &wall_x, &wall_y);
 	ft_printf("In mlx_call: wall_x = %d, wall_y = %d\n", wall_x, wall_y);
 
