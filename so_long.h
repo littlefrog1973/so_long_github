@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 09:57:48 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/10 14:21:32 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:35:16 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,27 @@ typedef	struct s_data {
 	int	line_length;
 	int	endian;
 }	t_data;
+
+typedef struct s_2d_axis{
+	int	x;
+	int	y;
+}	t_2d_axis;
+
+typedef struct s_window{
+	t_data	wall;
+	t_data	hero;
+	t_data	tile;
+	t_data	key;
+	t_data	door;
+}	t_window;
+
+#define IMG_SIZE 32
+#define TREE "./tree.xpm"
+#define WIZARD "./wizard.xpm"
+#define TILE "./tile.xpm"
+#define KEY "./key.xpm"
+#define DOOR "./door.xpm"
+
 int mlx_call(char **map);
 
 #endif

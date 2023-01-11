@@ -6,13 +6,13 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:14:28 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/11 09:31:46 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:30:54 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void map_size(char **map, int *x, int *y)
+void	map_size(char **map, t_2d_axis *size)
 {
 	int	i;
 	int	j;
@@ -23,89 +23,66 @@ void map_size(char **map, int *x, int *y)
 	j = 0;
 	while (map[0][j])
 		j++;
-	*x = j;
-	*y = i;
+	(*size).x = j;
+	(*size).y = i;
 }
 
-void my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	init_image(void *mlx, t_window *game)
 {
-	char	*dst;
+	t_2d_axis	size;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	(*game).wall.img = mlx_xpm_file_to_image(mlx, TREE, &(size.x), &(size.y));
+	(*game).hero.img = mlx_xpm_file_to_image(mlx, WIZARD, &(size.x), &(size.y));
+	(*game).key.img = mlx_xpm_file_to_image(mlx, KEY, &(size.x), &(size.y));
+	(*game).door.img = mlx_xpm_file_to_image(mlx, DOOR, &(size.x), &(size.y));
+	(*game).tile.img = mlx_xpm_file_to_image(mlx, TILE, &(size.x), &(size.y));
+	ft_printf("In init_image: size.x = %d, size.y = %d\n", size.x, size.y);
 }
 
-void put_wall(void *mlx, void *mlx_win, t_data wall, t_data wizard, t_data key, t_data door, t_data tile, char **map)
+void	put_image_to_win(void *mlx, void *win, void *img, t_2d_axis pos)
 {
-	int x;
-	int y;
-	int i;
-	int j;
+	mlx_put_image_to_window(mlx, win, img, pos.x * IMG_SIZE, pos.y * IMG_SIZE);
+}
 
-	i = 0;
-	map_size(map, &x, &y);
-	while (i < y)
+void	put_window(void *mlx, void *win, char **map, t_2d_axis size)
+{
+	t_window	game;
+	t_2d_axis	pos;
+
+	pos.y = 0;
+	init_image(mlx, &game);
+	while (pos.y < size.y)
 	{
-		j = 0;
-		while (j < x)
+		pos.x = 0;
+		while (pos.x < size.x)
 		{
-			if (map[i][j] == '1')
-			{
-				mlx_put_image_to_window(mlx, mlx_win, wall.img, j * 32, i * 32);
-			}
-			if (map[i][j] == 'P')
-			{
-				mlx_put_image_to_window(mlx, mlx_win, wizard.img, j * 32, i * 32);
-			}
-			if (map[i][j] == '0')
-			{
-				mlx_put_image_to_window(mlx, mlx_win, tile.img, j * 32, i * 32);
-			}
-			if (map[i][j] == 'C')
-			{
-				mlx_put_image_to_window(mlx, mlx_win, key.img, j * 32, i * 32);
-			}
-			if (map[i][j] == 'E')
-			{
-				mlx_put_image_to_window(mlx, mlx_win, door.img, j * 32, i * 32);
-			}
-			j++;
+			if (map[pos.y][pos.x] == '1')
+				put_image_to_win(mlx, win, game.wall.img, pos);
+			if (map[pos.y][pos.x] == 'P')
+				put_image_to_win(mlx, win, game.hero.img, pos);
+			if (map[pos.y][pos.x] == '0')
+				put_image_to_win(mlx, win, game.tile.img, pos);
+			if (map[pos.y][pos.x] == 'C')
+				put_image_to_win(mlx, win, game.key.img, pos);
+			if (map[pos.y][pos.x] == 'E')
+				put_image_to_win(mlx, win, game.door.img, pos);
+			pos.x++;
 		}
-		i++;
+		pos.y++;
 	}
 }
 
-int mlx_call(char **map)
+int	mlx_call(char **map)
 {
-	int	x;
-	int y;
-	int	wall_x;
-	int	wall_y;
-	void	*mlx;
-	void	*mlx_win;
-	t_data	wall;
-	t_data	wizard;
-	t_data	key;
-	t_data	door;
-	t_data	tile;
-//	int i, j;
+	t_2d_axis	sz;
+	void		*mlx;
+	void		*mlx_win;
 
-	x = 0;
-	y = 0;
-	map_size(map, &x, &y);
-	ft_printf("In mlx_call: map_x = %d, map_y = %d\n", x, y);
+	map_size(map, &sz);
+	ft_printf("In mlx_call: map_x = %d, map_y = %d\n", sz.x, sz.y);
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, x * 32, y * 32, "So_Long");
-	wall.img = mlx_xpm_file_to_image(mlx,"./tree_on_tile.xpm", &wall_x, &wall_y);
-	wizard.img = mlx_xpm_file_to_image(mlx,"./wizard_on_tile.xpm", &wall_x, &wall_y);
-	key.img = mlx_xpm_file_to_image(mlx,"./key_on_tile.xpm", &wall_x, &wall_y);
-	door.img = mlx_xpm_file_to_image(mlx,"./door_on_tile.xpm", &wall_x, &wall_y);
-	tile.img = mlx_xpm_file_to_image(mlx,"./tile.xpm", &wall_x, &wall_y);
-	ft_printf("In mlx_call: wall_x = %d, wall_y = %d\n", wall_x, wall_y);
-
-	wall.addr = mlx_get_data_addr(wall.img, &wall.bits_per_pixel, &wall.line_length, &wall.endian);
-	put_wall(mlx, mlx_win, wall, wizard, key, door, tile, map);
-//	mlx_put_image_to_window(mlx, mlx_win, wall.img, 0, 0);
+	mlx_win = mlx_new_window(mlx, sz.x * IMG_SIZE, sz.y * IMG_SIZE, "So_Long");
+	put_window(mlx, mlx_win, map, sz);
 	mlx_loop(mlx);
 	return (0);
 }

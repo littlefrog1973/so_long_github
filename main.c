@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 11:12:45 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/10 15:08:14 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:06:02 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,9 +157,7 @@ t_list **read_file(int argc, char *argv[], t_list **map_list_ptr)
 			map_list = ft_lstnew(get_next_line(fd));
 			*map_list_ptr = map_list;
 			while (ft_lstlast(*map_list_ptr)->content)
-			{
 				ft_lstadd_back(map_list_ptr, ft_lstnew(get_next_line(fd)));
-			}
 			if (!map_list->content)
 			{
 				free(map_list);
