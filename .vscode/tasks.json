@@ -10,7 +10,8 @@
                 "*.c",
                 "libft/libft.a",
                 "-o",
-                "so_long"
+                "so_long",
+                "-lmlx -lXext -lX11",
             ],
             "options": {
                 "cwd": "${fileDirname}"

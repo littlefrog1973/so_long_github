@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:14:28 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/11 14:30:54 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/11 22:35:08 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,22 @@ void	put_window(void *mlx, void *win, char **map, t_2d_axis size)
 int	mlx_call(char **map)
 {
 	t_2d_axis	sz;
-	void		*mlx;
-	void		*mlx_win;
+//	void		*mlx;
+//	void		*mlx_win;
+	t_game		win;
 
 	map_size(map, &sz);
 	ft_printf("In mlx_call: map_x = %d, map_y = %d\n", sz.x, sz.y);
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, sz.x * IMG_SIZE, sz.y * IMG_SIZE, "So_Long");
-	put_window(mlx, mlx_win, map, sz);
-	mlx_loop(mlx);
+//	mlx = mlx_init();
+	win.mlx = mlx_init();
+//	mlx_win = mlx_new_window(mlx, sz.x * IMG_SIZE, sz.y * IMG_SIZE, "So_Long");
+	win.mlx_win = mlx_new_window(win.mlx, sz.x * IMG_SIZE, sz.y * IMG_SIZE, "SL");
+	win.map = map;
+	win.size = sz;
+//	put_window(mlx, mlx_win, map, sz);
+	put_window(win.mlx, win.mlx_win, win.map, win.size);
+	mlx_key_hook(win.mlx_win, *ft_key_input, &win);
+//	mlx_loop(mlx);
+	mlx_loop(win.mlx);
 	return (0);
 }
