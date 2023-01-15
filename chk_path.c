@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:17:56 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/15 06:52:50 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 00:36:12 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	pre_flood_fill(char **map, int x, int y, t_2d_axis *items)
 		i++;
 	}
 	flood_fill(map2, x, y, items);
-	ft_printf("n_exit = %d, n_collect = %d\n", (*items).x, (*items).y);
 	err_exit(map2, 0);
 }
 

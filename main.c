@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 11:12:45 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/15 23:49:36 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 00:31:08 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ int	main(int argc, char *argv[])
 	char	**map;
 	t_list	*map_list_ptr;
 
+	if (argc == 1)
+	{
+		argv[1] = MAP;
+		argc = 2;
+	}
 	map = parse_map(argc, argv, &map_list_ptr);
 	chk_map(map);
 	mlx_call(map);

@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:53:09 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/15 23:59:01 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 00:33:08 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ int	ft_key_input(int key, void *param)
 	else if (key == ESC)
 		ft_so_long_exit(game);
 	put_window(*game);
-	ft_printf("Key pressd -> %d\n", key);
+	ft_printf("Key pressed -> %d\n", key);
 	return (0);
 }

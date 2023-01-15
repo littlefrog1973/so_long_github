@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:14:28 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/15 23:53:56 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 00:36:31 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	init_images(void *mlx, t_window *game)
 	(*game).key.img = mlx_xpm_file_to_image(mlx, KEY, &(size.x), &(size.y));
 	(*game).door.img = mlx_xpm_file_to_image(mlx, DOOR, &(size.x), &(size.y));
 	(*game).tile.img = mlx_xpm_file_to_image(mlx, TILE, &(size.x), &(size.y));
-	ft_printf("In init_image: size.x = %d, size.y = %d\n", size.x, size.y);
 }
 
 void	put_image_to_win(void *mlx, void *win, void *img, t_2d_axis pos)
@@ -44,7 +43,6 @@ void	put_image_to_win(void *mlx, void *win, void *img, t_2d_axis pos)
 	mlx_put_image_to_window(mlx, win, img, pos.x * IM_SIZE, pos.y * IM_SIZE);
 }
 
-//void	put_window(void *mlx, void *win, char **map, t_2d_axis size)
 void	put_window(t_game win)
 {
 	t_2d_axis	pos;
