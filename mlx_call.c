@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:14:28 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 00:36:31 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 06:42:14 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	mlx_call(char **map)
 	win.map = map;
 	win.size = sz;
 	init_images(win.mlx, &(win.items));
+	if (!win.items.tile.img || !win.items.door.img || !win.items.key.img)
+		ft_so_long_exit(&win);
 	put_window(win);
 	mlx_hook(win.mlx_win, 17, 0, *ft_so_long_exit, &win);
 	mlx_key_hook(win.mlx_win, *ft_key_input, &win);
