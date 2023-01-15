@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:49:08 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/15 23:49:52 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 06:36:02 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,21 @@ void	err_exit(char **map, int err_no)
 
 int	ft_so_long_exit(t_game *game)
 {
-	if (!game->map)
+	if (game->map)
 		err_exit(game->map, 0);
-	if (!game->items.door.img)
+	if (game->items.door.img)
 		mlx_destroy_image(game->mlx, game->items.door.img);
-	if (!game->items.hero.img)
+	if (game->items.hero.img)
 		mlx_destroy_image(game->mlx, game->items.hero.img);
-	if (!game->items.tile.img)
+	if (game->items.tile.img)
 		mlx_destroy_image(game->mlx, game->items.tile.img);
-	if (!game->items.wall.img)
+	if (game->items.wall.img)
 		mlx_destroy_image(game->mlx, game->items.wall.img);
-	if (!game->items.key.img)
+	if (game->items.key.img)
 		mlx_destroy_image(game->mlx, game->items.key.img);
-	if (!game->mlx_win)
+	if (game->mlx_win)
 		mlx_destroy_window(game->mlx, game->mlx_win);
-	if (!game->mlx)
+	if (game->mlx)
 		mlx_destroy_display(game->mlx);
 	exit (0);
 }
