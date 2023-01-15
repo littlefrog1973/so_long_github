@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 07:56:29 by sdeeyien          #+#    #+#             */
-/*   Updated: 2022/12/19 17:10:02 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 00:01:00 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,13 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*get_next_line(int fd);
 ssize_t	check_new_line(char *buffer);
 
-
-int	ft_printf(char const *fstr, ...);
-int	putnbr(int n, int fd, unsigned int flag);
-int	puthex(int n, int fd, const char *hexi, unsigned int flag);
-int	putptr(void *ptr, int fd);
-int	putunbr(unsigned int n, int fd);
-int	putstr(char *ptr, int fd, unsigned int flag);
-int	putchr(int c, int fd);
+int		ft_printf(char const *fstr, ...);
+int		putnbr(int n, int fd, unsigned int flag);
+int		puthex(int n, int fd, const char *hexi, unsigned int flag);
+int		putptr(void *ptr, int fd);
+int		putunbr(unsigned int n, int fd);
+int		putstr(char *ptr, int fd, unsigned int flag);
+int		putchr(int c, int fd);
 
 # ifdef __linux__
 #  define NULL_PTR ")lin("

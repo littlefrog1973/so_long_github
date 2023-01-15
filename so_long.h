@@ -6,34 +6,34 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 09:57:48 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/11 23:42:42 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/15 23:59:36 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include <mlx.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include "libft/libft.h"
+# include <mlx.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include "libft/libft.h"
 
-void err_exit(char **map, int err_no);
-int count_chr(const char *row, const char letter);
-int chk_rectan(char **map);
-int chk_wall(char **map);
-void chk_map(char **map);
-t_list **read_file(int argc, char *argv[], t_list **map_list_ptr);
-char **parse_map(int argc, char *argv[], t_list **map_list_ptr);
-int chk_path(char **map);
+void	err_exit(char **map, int err_no);
+int		count_chr(const char *row, const char letter);
+int		chk_rectan(char **map);
+int		chk_wall(char **map);
+void	chk_map(char **map);
+t_list	**read_file(int argc, char *argv[], t_list **map_list_ptr);
+char	**parse_map(int argc, char *argv[], t_list **map_list_ptr);
+int		chk_path(char **map);
 
-typedef	struct s_data {
+typedef struct s_data{
 	void	*img;
 	char	*addr;
-	int	bits_per_pixel;
-	int	line_length;
-	int	endian;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 }	t_data;
 
 typedef struct s_2d_axis{
@@ -50,29 +50,34 @@ typedef struct s_window{
 }	t_window;
 
 typedef struct s_game{
-	void	*mlx;
-	void	*mlx_win;
-	char	**map;
+	void		*mlx;
+	void		*mlx_win;
+	char		**map;
 	t_2d_axis	size;
+	t_window	items;
 }	t_game;
 
-#define IMG_SIZE 32
-#define TREE "./tree.xpm"
-#define WIZARD "./wizard.xpm"
-#define TILE "./tile.xpm"
-#define KEY "./key.xpm"
-#define DOOR "./door.xpm"
-#define UP 119
-#define DOWN 115
-#define LEFT 97
-#define RIGHT 100
+# define IM_SIZE 32
+# define TREE "./tree.xpm"
+# define WIZARD "./wizard.xpm"
+# define TILE "./tile.xpm"
+# define KEY "./key.xpm"
+# define DOOR "./door.xpm"
+# define UP 119
+# define DOWN 115
+# define LEFT 97
+# define RIGHT 100
 
-int mlx_call(char **map);
+int		mlx_call(char **map);
+int		ft_key_input(int key, void *param);
+int		ft_mouse_input(int key, int x, int y, void *param);
+void	move_cur(char **map, int direction, t_2d_axis size, int *n_move);
+void	put_window(t_game win);
+int		ft_so_long_exit(t_game *game);
+void	err_exit(char **map, int err_no);
+void	blank(void *a);
+void	chk_map(char **map);
 
-int	ft_key_input(int key, void *param);
-int ft_close();
-void	move_cur(char **map, int direction, t_2d_axis size);
-void	put_window(void *mlx, void *win, char **map, t_2d_axis size);
 # define KEY_A 97
 # define KEY_B 98
 # define KEY_C 99
@@ -121,9 +126,6 @@ void	put_window(void *mlx, void *win, char **map, t_2d_axis size);
 # define KEY_QUOTE 39
 # define KEY_SPACE 32
 # define KEY_TAB 65289
-
-
-
 # define ARW_UP 65362
 # define ARW_DOWN 65364
 # define ARW_LEFT 65361
@@ -138,12 +140,6 @@ void	put_window(void *mlx, void *win, char **map, t_2d_axis size);
 # define DELETE 65535
 # define HOME 65360
 # define END 65367
-
-
-
 # define ENTER 65293
 # define BCK_SPC 65288
-
-
-
 #endif

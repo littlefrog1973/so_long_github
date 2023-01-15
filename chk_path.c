@@ -6,39 +6,47 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:17:56 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/06 17:35:14 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/15 06:52:50 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void flood_fill(char **map, int x, int y, int *n_exit, int *n_collect)
+void	init_2d_axis(t_2d_axis *var)
+{
+	(*var).x = 0;
+	(*var).y = 0;
+}
+
+void	flood_fill(char **map, int x, int y, t_2d_axis *items)
+//void flood_fill(char **map, int x, int y, int *n_exit, int *n_collect)
 {
 	if (map[x][y] == '1' || map[x][y] == 'X')
 		return ;
 	if (map[x][y] == 'E')
 	{
-		(*n_exit)++;
+		items->x++;
 		map[x][y] = 'X';
 	}
 	if (map[x][y] == 'C')
 	{
-		(*n_collect)++;
+		items->y++;
 		map[x][y] = 'X';
 	}
 	if (map[x][y] == '0' || map[x][y] == 'P')
 		map[x][y] = 'X';
-	flood_fill(map, x - 1, y, n_exit, n_collect);
-	flood_fill(map, x, y + 1, n_exit, n_collect);
-	flood_fill(map, x + 1, y, n_exit, n_collect);
-	flood_fill(map, x, y - 1, n_exit, n_collect);
+	flood_fill(map, x - 1, y, items);
+	flood_fill(map, x, y + 1, items);
+	flood_fill(map, x + 1, y, items);
+	flood_fill(map, x, y - 1, items);
 	return ;
 }
 
-void pre_flood_fill(char **map, int x, int y, int *n_exit, int *n_collect)
+void	pre_flood_fill(char **map, int x, int y, t_2d_axis *items)
+//void pre_flood_fill(char **map, int x, int y, int *n_exit, int *n_collect)
 {
 	char	**map2;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (map[i])
@@ -57,20 +65,19 @@ void pre_flood_fill(char **map, int x, int y, int *n_exit, int *n_collect)
 		}
 		i++;
 	}
-	flood_fill(map2, x, y, n_exit, n_collect);
-	ft_printf("n_exit = %d, n_collect = %d\n", *n_exit, *n_collect);
+	flood_fill(map2, x, y, items);
+	ft_printf("n_exit = %d, n_collect = %d\n", (*items).x, (*items).y);
 	err_exit(map2, 0);
 }
 
-int chk_path(char **map)
+int	chk_path(char **map)
+// items.x = n_exit, items.y = n_collect
 {
-	int	no_exit;
-	int	no_collect;
-	int	i;
-	int	j;
+	t_2d_axis	items;
+	int			i;
+	int			j;
 
-	no_exit = 0;
-	no_collect = 0;
+	init_2d_axis(&items);
 	i = 1;
 	while (map[i])
 	{
@@ -78,16 +85,17 @@ int chk_path(char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] == 'P')
-				break;
+				break ;
 			j++;
 		}
 		if (map[i][j] == 'P')
-			break;
+			break ;
 		i++;
 	}
-	ft_printf("In chk_path: Px = %d, Py = %d\n", i, j);
-	pre_flood_fill(map, i, j, &no_exit, &no_collect);
-	if (no_exit == 1 && no_collect >= 1)
+	pre_flood_fill(map, i, j, &items);
+	if (items.x == 1 && items.y >= 1)
+	{
 		return (0);
+	}
 	return (1);
 }

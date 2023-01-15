@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:14:28 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/11 22:35:08 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/15 23:53:56 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	map_size(char **map, t_2d_axis *size)
 	(*size).y = i;
 }
 
-void	init_image(void *mlx, t_window *game)
+void	init_images(void *mlx, t_window *game)
 {
 	t_2d_axis	size;
 
@@ -41,31 +41,30 @@ void	init_image(void *mlx, t_window *game)
 
 void	put_image_to_win(void *mlx, void *win, void *img, t_2d_axis pos)
 {
-	mlx_put_image_to_window(mlx, win, img, pos.x * IMG_SIZE, pos.y * IMG_SIZE);
+	mlx_put_image_to_window(mlx, win, img, pos.x * IM_SIZE, pos.y * IM_SIZE);
 }
 
-void	put_window(void *mlx, void *win, char **map, t_2d_axis size)
+//void	put_window(void *mlx, void *win, char **map, t_2d_axis size)
+void	put_window(t_game win)
 {
-	t_window	game;
 	t_2d_axis	pos;
 
 	pos.y = 0;
-	init_image(mlx, &game);
-	while (pos.y < size.y)
+	while (pos.y < win.size.y)
 	{
 		pos.x = 0;
-		while (pos.x < size.x)
+		while (pos.x < win.size.x)
 		{
-			if (map[pos.y][pos.x] == '1')
-				put_image_to_win(mlx, win, game.wall.img, pos);
-			if (map[pos.y][pos.x] == 'P')
-				put_image_to_win(mlx, win, game.hero.img, pos);
-			if (map[pos.y][pos.x] == '0')
-				put_image_to_win(mlx, win, game.tile.img, pos);
-			if (map[pos.y][pos.x] == 'C')
-				put_image_to_win(mlx, win, game.key.img, pos);
-			if (map[pos.y][pos.x] == 'E')
-				put_image_to_win(mlx, win, game.door.img, pos);
+			if (win.map[pos.y][pos.x] == '1')
+				put_image_to_win(win.mlx, win.mlx_win, win.items.wall.img, pos);
+			if (win.map[pos.y][pos.x] == 'P')
+				put_image_to_win(win.mlx, win.mlx_win, win.items.hero.img, pos);
+			if (win.map[pos.y][pos.x] == '0')
+				put_image_to_win(win.mlx, win.mlx_win, win.items.tile.img, pos);
+			if (win.map[pos.y][pos.x] == 'C')
+				put_image_to_win(win.mlx, win.mlx_win, win.items.key.img, pos);
+			if (win.map[pos.y][pos.x] == 'E')
+				put_image_to_win(win.mlx, win.mlx_win, win.items.door.img, pos);
 			pos.x++;
 		}
 		pos.y++;
@@ -75,22 +74,24 @@ void	put_window(void *mlx, void *win, char **map, t_2d_axis size)
 int	mlx_call(char **map)
 {
 	t_2d_axis	sz;
-//	void		*mlx;
-//	void		*mlx_win;
 	t_game		win;
 
 	map_size(map, &sz);
-	ft_printf("In mlx_call: map_x = %d, map_y = %d\n", sz.x, sz.y);
-//	mlx = mlx_init();
 	win.mlx = mlx_init();
-//	mlx_win = mlx_new_window(mlx, sz.x * IMG_SIZE, sz.y * IMG_SIZE, "So_Long");
-	win.mlx_win = mlx_new_window(win.mlx, sz.x * IMG_SIZE, sz.y * IMG_SIZE, "SL");
+	if (!win.mlx)
+		err_exit(map, 7);
+	win.mlx_win = mlx_new_window(win.mlx, sz.x * IM_SIZE, sz.y * IM_SIZE, "SL");
+	if (!win.mlx_win)
+	{
+		free(win.mlx);
+		err_exit(map, 7);
+	}
 	win.map = map;
 	win.size = sz;
-//	put_window(mlx, mlx_win, map, sz);
-	put_window(win.mlx, win.mlx_win, win.map, win.size);
+	init_images(win.mlx, &(win.items));
+	put_window(win);
+	mlx_hook(win.mlx_win, 17, 0, *ft_so_long_exit, &win);
 	mlx_key_hook(win.mlx_win, *ft_key_input, &win);
-//	mlx_loop(mlx);
 	mlx_loop(win.mlx);
 	return (0);
 }
