@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:14:28 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 06:42:14 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 16:46:45 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ void	init_images(void *mlx, t_window *game)
 	(*game).key.img = mlx_xpm_file_to_image(mlx, KEY, &(size.x), &(size.y));
 	(*game).door.img = mlx_xpm_file_to_image(mlx, DOOR, &(size.x), &(size.y));
 	(*game).tile.img = mlx_xpm_file_to_image(mlx, TILE, &(size.x), &(size.y));
+	if (!(*game).wall.img || !(*game).hero.img || !(*game).key.img ||
+		!(*game).door.img || !(*game).tile.img)
+		ft_so_long_exit(mlx);
 }
 
 void	put_image_to_win(void *mlx, void *win, void *img, t_2d_axis pos)
@@ -81,17 +84,19 @@ int	mlx_call(char **map)
 	win.mlx_win = mlx_new_window(win.mlx, sz.x * IM_SIZE, sz.y * IM_SIZE, "SL");
 	if (!win.mlx_win)
 	{
+		mlx_destroy_display(win.mlx);
 		free(win.mlx);
 		err_exit(map, 7);
 	}
 	win.map = map;
 	win.size = sz;
+	win.pos_e = find_p(map, 'E');
+	ft_printf("pos_e.x = %d, pos_e.y = %d\n", win.pos_e.x, win.pos_e.y);
 	init_images(win.mlx, &(win.items));
-	if (!win.items.tile.img || !win.items.door.img || !win.items.key.img)
-		ft_so_long_exit(&win);
 	put_window(win);
 	mlx_hook(win.mlx_win, 17, 0, *ft_so_long_exit, &win);
 	mlx_key_hook(win.mlx_win, *ft_key_input, &win);
+	mlx_loop_hook(win.mlx, *ft_update, &win);
 	mlx_loop(win.mlx);
 	return (0);
 }

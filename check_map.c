@@ -6,11 +6,32 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:36:51 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/13 10:26:48 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 15:01:38 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	count_collect(char **map, const char letter)
+{
+	int	i;
+	int	j;
+	int count;
+
+	i = 0;
+	count = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			count += (map[i][j] == letter);
+			j++;
+		}
+		i++;
+	}
+	return (count);
+}
 
 int	count_chr(const char *row, const char letter)
 {
@@ -47,12 +68,12 @@ int	chk_rectan(char **map)
 
 int	chk_wall(char **map)
 {
-	int	cls;
+	int	closed;
 	int	i;
 	int	dum;
 
 	i = 0;
-	cls = 1;
+	closed = 1;
 	dum = 0;
 	while (map[i])
 	{
@@ -60,17 +81,17 @@ int	chk_wall(char **map)
 			dum = 1;
 		else
 			dum = 0;
-		cls = dum * cls;
+		closed = dum * closed;
 		i++;
 	}
 	dum = 0;
-	if (count_chr(map[i - 1], '1') && (int) ft_strlen(map[i - 1]))
-		if (count_chr(map[0], '1') && (int) ft_strlen(map[0]))
+	if (count_chr(map[i - 1], '1') == (int) ft_strlen(map[i - 1])
+		&& (count_chr(map[0], '1') == (int) ft_strlen(map[0])))
 			dum = 1;
 	else
 			dum = 0;
-	cls = cls * dum;
-	return (cls);
+	closed = closed * dum;
+	return (closed);
 }
 
 void	chk_map_detail(char **map, int *n_ext, int *n_col, int *n_str)

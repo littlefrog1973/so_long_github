@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 09:57:48 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 00:31:30 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 16:38:52 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_game{
 	char		**map;
 	t_2d_axis	size;
 	t_window	items;
+	t_2d_axis	pos_e;
 }	t_game;
 
 # define IM_SIZE 32
@@ -127,21 +128,24 @@ typedef struct s_game{
 #  define BCK_SPC 65288
 # endif
 
-void	err_exit(char **map, int err_no);
-int		count_chr(const char *row, const char letter);
-int		chk_rectan(char **map);
-int		chk_wall(char **map);
-void	chk_map(char **map);
-t_list	**read_file(int argc, char *argv[], t_list **map_list_ptr);
-char	**parse_map(int argc, char *argv[], t_list **map_list_ptr);
-int		chk_path(char **map);
-int		mlx_call(char **map);
-int		ft_key_input(int key, void *param);
-int		ft_mouse_input(int key, int x, int y, void *param);
-void	move_cur(char **map, int direction, t_2d_axis size, int *n_move);
-void	put_window(t_game win);
-int		ft_so_long_exit(t_game *game);
-void	err_exit(char **map, int err_no);
-void	blank(void *a);
-void	chk_map(char **map);
+void		err_exit(char **map, int err_no);
+int			count_chr(const char *row, const char letter);
+int			chk_rectan(char **map);
+int			chk_wall(char **map);
+void		chk_map(char **map);
+t_list		**read_file(int argc, char *argv[], t_list **map_list_ptr);
+char		**parse_map(int argc, char *argv[], t_list **map_list_ptr);
+int			chk_path(char **map);
+int			mlx_call(char **map);
+int			ft_key_input(int key, void *param);
+int			ft_mouse_input(int key, int x, int y, void *param);
+int			ft_update(void *param);
+void		move_cur(t_game *win, int direction, int *n_move, int *n_collect);
+void		put_window(t_game win);
+int			ft_so_long_exit(t_game *game);
+void		err_exit(char **map, int err_no);
+void		blank(void *a);
+void		chk_map(char **map);
+int			count_collect(char **map, const char letter);
+t_2d_axis	find_p(char **map, char letter);
 #endif

@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:49:08 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 06:36:02 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 16:50:22 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,21 @@ int	ft_so_long_exit(t_game *game)
 		mlx_destroy_window(game->mlx, game->mlx_win);
 	if (game->mlx)
 		mlx_destroy_display(game->mlx);
+	free(game->mlx);
 	exit (0);
 }
 
-t_2d_axis	find_p(char **map, t_2d_axis size, char letter)
+t_2d_axis	find_p(char **map, char letter)
 {
 	int			x;
 	int			y;
 	t_2d_axis	p_pos;
 
 	y = 0;
-	while (y < size.y)
+	while (map[y])
 	{
 		x = 0;
-		while (x < size.x)
+		while (map[y][x])
 		{
 			if (map[y][x] == letter)
 				break ;
@@ -85,58 +86,79 @@ t_2d_axis	find_p(char **map, t_2d_axis size, char letter)
 	return (p_pos);
 }
 
-void	change_map(char **map, t_2d_axis p_pos, int direction)
+void	change_map(char **map, t_2d_axis p_pos, int direction, char letter)
 {
 	if (direction == UP && map[p_pos.y - 1][p_pos.x] != '1')
 	{
 		p_pos.y -= 1;
 		map[p_pos.y][p_pos.x] = 'P';
-		map[p_pos.y + 1][p_pos.x] = '0';
+		map[p_pos.y + 1][p_pos.x] = letter;
 	}
 	if (direction == DOWN && map[p_pos.y + 1][p_pos.x] != '1')
 	{
 		p_pos.y += 1;
 		map[p_pos.y][p_pos.x] = 'P';
-		map[p_pos.y - 1][p_pos.x] = '0';
+		map[p_pos.y - 1][p_pos.x] = letter;
 	}
 	if (direction == LEFT && map[p_pos.y][p_pos.x - 1] != '1')
 	{
 		p_pos.x -= 1;
 		map[p_pos.y][p_pos.x] = 'P';
-		map[p_pos.y][p_pos.x + 1] = '0';
+		map[p_pos.y][p_pos.x + 1] = letter;
 	}
 	if (direction == RIGHT && map[p_pos.y][p_pos.x + 1] != '1')
 	{
 		p_pos.x += 1;
 		map[p_pos.y][p_pos.x] = 'P';
-		map[p_pos.y][p_pos.x - 1] = '0';
+		map[p_pos.y][p_pos.x - 1] = letter;
 	}
 }
 
-void	move_cur(char **map, int direction, t_2d_axis size, int *n_move)
+void	move_cur(t_game *win, int direction, int *n_move, int *n_collect)
 {
 	t_2d_axis	p_pos;
 
-	p_pos = find_p(map, size, 'P');
-	if (direction == UP && map[p_pos.y - 1][p_pos.x] != '1')
+	p_pos = find_p(win->map, 'P');
+	if (direction == UP && win->map[p_pos.y - 1][p_pos.x] != '1')
 	{
-		change_map(map, p_pos, direction);
+		if (win->map[p_pos.y - 1][p_pos.x] == 'C')
+			(*n_collect)++;
+		if (win->pos_e.x == p_pos.x && win->pos_e.y == p_pos.y)
+			change_map(win->map, p_pos, direction, 'E');
+		else
+			change_map(win->map, p_pos, direction, '0');
 		(*n_move)++;
 	}
-	if (direction == DOWN && map[p_pos.y + 1][p_pos.x] != '1')
+	if (direction == DOWN && win->map[p_pos.y + 1][p_pos.x] != '1')
 	{
-		change_map(map, p_pos, direction);
+		if (win->map[p_pos.y + 1][p_pos.x] == 'C')
+			(*n_collect)++;
+		if (win->pos_e.x == p_pos.x && win->pos_e.y == p_pos.y)
+			change_map(win->map, p_pos, direction, 'E');
+		else
+			change_map(win->map, p_pos, direction, '0');
 		(*n_move)++;
 	}
-	if (direction == LEFT && map[p_pos.y][p_pos.x - 1] != '1')
+	if (direction == LEFT && win->map[p_pos.y][p_pos.x - 1] != '1')
 	{
-		change_map(map, p_pos, direction);
+		if (win->map[p_pos.y][p_pos.x - 1] == 'C')
+			(*n_collect)++;
+		if (win->pos_e.x == p_pos.x && win->pos_e.y == p_pos.y)
+			change_map(win->map, p_pos, direction, 'E');
+		else
+			change_map(win->map, p_pos, direction, '0');
 		(*n_move)++;
 	}
-	if (direction == RIGHT && map[p_pos.y][p_pos.x + 1] != '1')
+	if (direction == RIGHT && win->map[p_pos.y][p_pos.x + 1] != '1')
 	{
-		change_map(map, p_pos, direction);
+		if (win->map[p_pos.y][p_pos.x + 1] == 'C')
+			(*n_collect)++;
+		if (win->pos_e.x == p_pos.x && win->pos_e.y == p_pos.y)
+			change_map(win->map, p_pos, direction, 'E');
+		else
+			change_map(win->map, p_pos, direction, '0');
 		(*n_move)++;
 	}
 	ft_printf("Number of movement = %d\n", *n_move);
+	ft_printf("n_collect = %d\n", *n_collect);
 }

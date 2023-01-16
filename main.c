@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 11:12:45 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 00:31:08 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 12:32:58 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ t_list	**read_file(int argc, char *argv[], t_list **map_list_ptr)
 			return (map_list_ptr);
 		}
 		else
-			exit(1);
+			perror("Error\n");
 	}
-	else
-		exit(1);
+	exit(1);
 }
 
 char	**parse_map(int argc, char *argv[], t_list **map_list_ptr)

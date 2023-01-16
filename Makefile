@@ -6,13 +6,12 @@
 #    By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 12:25:01 by sdeeyien          #+#    #+#              #
-#    Updated: 2023/01/13 09:39:32 by sdeeyien         ###   ########.fr        #
+#    Updated: 2023/01/16 14:07:25 by sdeeyien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-#CFLAGS = -Wall -Werror -Wextra
-CFLAGS =
+CFLAGS = -Wall -Werror -Wextra
 MLXFLAGS = -lmlx -lXext -lX11
 
 LIBDIR = libft
