@@ -6,11 +6,32 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:17:56 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 00:36:12 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 17:03:50 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+int	count_collect(char **map, const char letter)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			count += (map[i][j] == letter);
+			j++;
+		}
+		i++;
+	}
+	return (count);
+}
 
 void	init_2d_axis(t_2d_axis *var)
 {

@@ -6,7 +6,7 @@
 #    By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 12:25:01 by sdeeyien          #+#    #+#              #
-#    Updated: 2023/01/16 14:07:25 by sdeeyien         ###   ########.fr        #
+#    Updated: 2023/01/16 22:53:03 by sdeeyien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBDIR = libft
 
 DEPS = so_long.h
 
-SRC = main.c chk_path.c mlx_call.c utils.c hooks.c check_map.c
+SRC = main.c chk_path.c mlx_call.c utils.c hooks.c check_map.c utils2.c
 
 OBJ = $(SRC:.c=.o)
 

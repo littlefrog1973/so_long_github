@@ -6,32 +6,11 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 09:36:51 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 15:01:38 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 17:03:57 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	count_collect(char **map, const char letter)
-{
-	int	i;
-	int	j;
-	int count;
-
-	i = 0;
-	count = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			count += (map[i][j] == letter);
-			j++;
-		}
-		i++;
-	}
-	return (count);
-}
 
 int	count_chr(const char *row, const char letter)
 {

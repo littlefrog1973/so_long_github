@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 09:57:48 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 16:38:52 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 22:48:57 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,4 +148,6 @@ void		blank(void *a);
 void		chk_map(char **map);
 int			count_collect(char **map, const char letter);
 t_2d_axis	find_p(char **map, char letter);
+void		update_map(t_game *win, t_2d_axis p_pos, int *n_collect,
+				int direction);
 #endif

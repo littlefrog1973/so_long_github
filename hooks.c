@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:53:09 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 16:34:44 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 22:22:29 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,13 @@ int	ft_key_input(int key, void *param)
 	static int	n_move;
 	static int	n_collect;
 	t_game		*game;
-	static int			map_collect;
+	static int	map_collect;
 	t_2d_axis	pos_exit;
 
 	game = (t_game *) param;
 	pos_exit = find_p(game->map, 'E');
 	if (!map_collect)
 		map_collect = count_collect(game->map, 'C');
-	ft_printf("map_collect = %d\n", map_collect);
 	mlx_clear_window(game->mlx, game->mlx_win);
 	if (key == UP)
 		move_cur(game, UP, &n_move, &n_collect);
@@ -59,12 +58,8 @@ int	ft_key_input(int key, void *param)
 	else if (key == ESC)
 		ft_so_long_exit(game);
 	if (n_collect == map_collect && check_p_e_pos(pos_exit, game->map))
-	{
-		ft_printf("Congrat!!!\n");
 		ft_so_long_exit(game);
-	}
 	put_window(*game);
-	ft_printf("Key pressed -> %d\n", key);
 	return (0);
 }
 

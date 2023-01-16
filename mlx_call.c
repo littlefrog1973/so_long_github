@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:14:28 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 16:46:45 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/16 17:01:54 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	init_images(void *mlx, t_window *game)
 	(*game).key.img = mlx_xpm_file_to_image(mlx, KEY, &(size.x), &(size.y));
 	(*game).door.img = mlx_xpm_file_to_image(mlx, DOOR, &(size.x), &(size.y));
 	(*game).tile.img = mlx_xpm_file_to_image(mlx, TILE, &(size.x), &(size.y));
-	if (!(*game).wall.img || !(*game).hero.img || !(*game).key.img ||
-		!(*game).door.img || !(*game).tile.img)
+	if (!(*game).wall.img || !(*game).hero.img || !(*game).key.img
+		|| !(*game).door.img || !(*game).tile.img)
 		ft_so_long_exit(mlx);
 }
 
