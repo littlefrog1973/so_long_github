@@ -6,7 +6,7 @@
 #    By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 12:25:01 by sdeeyien          #+#    #+#              #
-#    Updated: 2023/01/17 09:04:11 by sdeeyien         ###   ########.fr        #
+#    Updated: 2023/01/17 11:54:13 by sdeeyien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,12 +44,15 @@ $(NAME): $(OBJ)
 
 clean :
 	rm -f *.o
-	cd $(LIBDIR) && make clean
-	cd $(MLXDIR) && make clean
+#	cd $(LIBDIR) && make clean
+#	cd $(MLXDIR) && make clean
+	make -C $(LIBDIR) clean
+	make -C $(MLXDIR) clean
 
 fclean : clean
 	rm -f $(NAME)
-	cd $(LIBDIR) && make fclean
+#	cd $(LIBDIR) && make fclean
+	make -C $(LIBDIR) fclean
 
 re : fclean all
 
