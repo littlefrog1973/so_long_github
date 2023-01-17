@@ -6,14 +6,22 @@
 #    By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 12:25:01 by sdeeyien          #+#    #+#              #
-#    Updated: 2023/01/16 22:53:03 by sdeeyien         ###   ########.fr        #
+#    Updated: 2023/01/17 09:04:11 by sdeeyien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-MLXFLAGS = -lmlx -lXext -lX11
-
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	MLXFLAGS = -lmlx -lXext -lX11
+	MLXDIR = mlx_linux
+	LIBMLX = libmlx_Linux
+else
+	MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+	MLXDIR = mlx_open
+	LIBMLX = libmlx
+endif
 LIBDIR = libft
 
 DEPS = so_long.h
@@ -28,7 +36,8 @@ all : $(NAME)
 
 $(NAME): $(OBJ)
 	cd $(LIBDIR) && make
-	$(CC) -o $@ $(OBJ) $(LIBDIR)/$(LIBDIR).a $(MLXFLAGS)
+	cd $(MLXDIR) && make
+	$(CC) -o $@ $(OBJ) $(LIBDIR)/$(LIBDIR).a $(MLXDIR)/$(LIBMLX).a $(MLXFLAGS)
 
 %.o: %.c $(DEPS)
 	$(CC) -c $< $(DEPS) $(CFLAGS)
@@ -36,6 +45,7 @@ $(NAME): $(OBJ)
 clean :
 	rm -f *.o
 	cd $(LIBDIR) && make clean
+	cd $(MLXDIR) && make clean
 
 fclean : clean
 	rm -f $(NAME)

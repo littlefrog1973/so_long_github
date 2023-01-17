@@ -6,14 +6,19 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 09:57:48 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 22:48:57 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/17 09:13:58 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include <mlx.h>
+//# include <mlx.h>
+# ifdef __linux__
+#  include "mlx_linux/mlx.h"
+# else
+#  include "mlx_opengl/mlx.h"
+# endif
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -58,10 +63,6 @@ typedef struct s_game{
 # define MAP "./sample.ber"
 
 # ifdef __linux__
-#  define UP 119
-#  define DOWN 115
-#  define LEFT 97
-#  define RIGHT 100
 #  define KEY_A 97
 #  define KEY_B 98
 #  define KEY_C 99
@@ -126,7 +127,18 @@ typedef struct s_game{
 #  define END 65367
 #  define ENTER 65293
 #  define BCK_SPC 65288
+# else
+#  define KEY_A 0
+#  define KEY_D 2
+#  define KEY_S 1
+#  define KEY_W 13
+#  define ESC 53
 # endif
+
+# define UP KEY_W
+# define DOWN KEY_S
+# define LEFT KEY_A
+# define RIGHT KEY_D
 
 void		err_exit(char **map, int err_no);
 int			count_chr(const char *row, const char letter);
