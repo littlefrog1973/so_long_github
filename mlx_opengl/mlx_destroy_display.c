@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
-/*   Updated: 2023/01/17 13:34:57 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/17 13:39:15 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 int	mlx_destroy_display(void *xvar)
 {
+	xvar = xvar + 0;
 	return (0);
 }
