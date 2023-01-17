@@ -6,12 +6,13 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
-/*   Updated: 2023/01/17 11:47:49 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/17 13:34:57 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_int.h"
+#include "mlx.h"
 
 int	mlx_destroy_display(void *xvar)
 {
+	return (0);
 }

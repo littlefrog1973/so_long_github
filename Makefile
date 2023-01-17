@@ -6,7 +6,7 @@
 #    By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 12:25:01 by sdeeyien          #+#    #+#              #
-#    Updated: 2023/01/17 11:54:13 by sdeeyien         ###   ########.fr        #
+#    Updated: 2023/01/17 13:31:43 by sdeeyien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ ifeq ($(UNAME_S),Linux)
 	MLXDIR = mlx_linux
 	LIBMLX = libmlx_Linux
 else
-	MLXFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
-	MLXDIR = mlx_open
+	MLXFLAGS = -Lmlx_opengl -lmlx -framework OpenGL -framework AppKit
+	MLXDIR = mlx_opengl
 	LIBMLX = libmlx
 endif
 LIBDIR = libft
