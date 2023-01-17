@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 09:57:48 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/17 09:13:58 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:04:14 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ char		**parse_map(int argc, char *argv[], t_list **map_list_ptr);
 int			chk_path(char **map);
 int			mlx_call(char **map);
 int			ft_key_input(int key, void *param);
-int			ft_mouse_input(int key, int x, int y, void *param);
 int			ft_update(void *param);
 void		move_cur(t_game *win, int direction, int *n_move, int *n_collect);
 void		put_window(t_game win);

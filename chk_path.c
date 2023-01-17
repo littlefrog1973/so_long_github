@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:17:56 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 17:03:50 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/17 13:58:52 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	init_2d_axis(t_2d_axis *var)
 }
 
 void	flood_fill(char **map, int x, int y, t_2d_axis *items)
-//void flood_fill(char **map, int x, int y, int *n_exit, int *n_collect)
 {
 	if (map[x][y] == '1' || map[x][y] == 'X')
 		return ;
@@ -64,7 +63,6 @@ void	flood_fill(char **map, int x, int y, t_2d_axis *items)
 }
 
 void	pre_flood_fill(char **map, int x, int y, t_2d_axis *items)
-//void pre_flood_fill(char **map, int x, int y, int *n_exit, int *n_collect)
 {
 	char	**map2;
 	int		i;

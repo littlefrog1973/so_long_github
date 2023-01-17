@@ -6,22 +6,11 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:53:09 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 22:22:29 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:04:31 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	ft_mouse_input(int key, int x, int y, void *param)
-{
-	t_game	*game;
-
-	game = (t_game *) param;
-	ft_printf("Mouse click code =%d, x = %d, y = %d\n", key, x, y);
-	mlx_clear_window(game->mlx, game->mlx_win);
-	put_window(*game);
-	return (0);
-}
 
 int	check_p_e_pos(t_2d_axis pos_e, char **map)
 {

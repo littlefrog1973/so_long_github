@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:14:28 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 17:01:54 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:02:33 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int	mlx_call(char **map)
 	win.map = map;
 	win.size = sz;
 	win.pos_e = find_p(map, 'E');
-	ft_printf("pos_e.x = %d, pos_e.y = %d\n", win.pos_e.x, win.pos_e.y);
 	init_images(win.mlx, &(win.items));
 	put_window(win);
 	mlx_hook(win.mlx_win, 17, 0, *ft_so_long_exit, &win);
