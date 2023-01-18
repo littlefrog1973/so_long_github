@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:53:09 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/17 14:04:31 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/18 12:07:15 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	check_p_e_pos(t_2d_axis pos_e, char **map)
 
 int	ft_key_input(int key, void *param)
 {
-	static int	n_move;
 	static int	n_collect;
 	t_game		*game;
 	static int	map_collect;
@@ -37,13 +36,13 @@ int	ft_key_input(int key, void *param)
 		map_collect = count_collect(game->map, 'C');
 	mlx_clear_window(game->mlx, game->mlx_win);
 	if (key == UP)
-		move_cur(game, UP, &n_move, &n_collect);
+		move_cur(game, UP, &(game->n_move), &n_collect);
 	else if (key == DOWN)
-		move_cur(game, DOWN, &n_move, &n_collect);
+		move_cur(game, DOWN, &(game->n_move), &n_collect);
 	else if (key == LEFT)
-		move_cur(game, LEFT, &n_move, &n_collect);
+		move_cur(game, LEFT, &(game->n_move), &n_collect);
 	else if (key == RIGHT)
-		move_cur(game, RIGHT, &n_move, &n_collect);
+		move_cur(game, RIGHT, &(game->n_move), &n_collect);
 	else if (key == ESC)
 		ft_so_long_exit(game);
 	if (n_collect == map_collect && check_p_e_pos(pos_exit, game->map))

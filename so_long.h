@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 09:57:48 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/17 14:04:14 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/18 11:39:02 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_game{
 	t_2d_axis	size;
 	t_window	items;
 	t_2d_axis	pos_e;
+	int			n_move;
 }	t_game;
 
 # define IM_SIZE 32

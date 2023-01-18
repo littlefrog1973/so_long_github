@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:14:28 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/17 14:02:33 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/18 11:56:45 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	put_window(t_game win)
 		}
 		pos.y++;
 	}
+	mlx_string_put(win.mlx, win.mlx_win, (win.size.x - 1) * IM_SIZE,
+		(win.size.y - 1) * IM_SIZE, 0xFEE861, ft_itoa(win.n_move));
 }
 
 int	mlx_call(char **map)
@@ -92,6 +94,7 @@ int	mlx_call(char **map)
 	win.size = sz;
 	win.pos_e = find_p(map, 'E');
 	init_images(win.mlx, &(win.items));
+	win.n_move = 0;
 	put_window(win);
 	mlx_hook(win.mlx_win, 17, 0, *ft_so_long_exit, &win);
 	mlx_key_hook(win.mlx_win, *ft_key_input, &win);
