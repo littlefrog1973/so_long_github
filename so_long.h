@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 09:57:48 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/19 09:50:34 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:13:19 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,12 +142,13 @@ typedef struct s_game{
 # define RIGHT KEY_D
 
 void		err_exit(char **map, int err_no);
+void		err_exit_main(int err_no);
 int			count_chr(const char *row, const char letter);
 int			chk_rectan(char **map);
 int			chk_wall(char **map);
 void		chk_map(char **map);
-t_list		**read_file(int argc, char *argv[], t_list **map_list_ptr);
-char		**parse_map(int argc, char *argv[], t_list **map_list_ptr);
+t_list		**read_file(char *argv[], t_list **map_list_ptr);
+char		**parse_map(char *argv[], t_list **map_list_ptr);
 int			chk_path(char **map);
 int			mlx_call(char **map);
 int			ft_key_input(int key, void *param);

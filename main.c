@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 11:12:45 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 12:32:58 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:12:57 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	blank(void *a)
 	a = a + 0;
 }
 
-t_list	**read_file(int argc, char *argv[], t_list **map_list_ptr)
+t_list	**read_file(char *argv[], t_list **map_list_ptr)
 {
 	int		fd;
 	t_list	*map_list;
 
-	if (argc == 2 && !ft_strncmp(".ber", &argv[1][ft_strlen(argv[1]) - 4], 4))
+	if (!ft_strncmp(".ber", &argv[1][ft_strlen(argv[1]) - 4], 4))
 	{
 		fd = open(argv[1], O_RDONLY);
 		if (fd >= 0)
@@ -34,7 +34,7 @@ t_list	**read_file(int argc, char *argv[], t_list **map_list_ptr)
 			if (!map_list->content)
 			{
 				free(map_list);
-				exit (1);
+				err_exit_main(3);
 			}
 			fd = close(fd);
 			return (map_list_ptr);
@@ -45,18 +45,18 @@ t_list	**read_file(int argc, char *argv[], t_list **map_list_ptr)
 	exit(1);
 }
 
-char	**parse_map(int argc, char *argv[], t_list **map_list_ptr)
+char	**parse_map(char *argv[], t_list **map_list_ptr)
 {
 	t_list	*map_runner;
 	char	**map_array;
 	int		i;
 
-	map_list_ptr = read_file(argc, argv, map_list_ptr);
+	map_list_ptr = read_file(argv, map_list_ptr);
 	map_array = (char **) malloc(ft_lstsize(*map_list_ptr) * sizeof(char *));
 	if (!map_array)
 	{
 		ft_lstclear(map_list_ptr, free);
-		exit(1);
+		err_exit_main(1);
 	}
 	map_runner = *map_list_ptr;
 	i = 0;
@@ -77,12 +77,11 @@ int	main(int argc, char *argv[])
 	char	**map;
 	t_list	*map_list_ptr;
 
-	if (argc == 1)
-	{
-		argv[1] = MAP;
-		argc = 2;
-	}
-	map = parse_map(argc, argv, &map_list_ptr);
+	if (argc != 2)
+		err_exit_main(1);
+	if (ft_strlen(argv[1]) < 4)
+		err_exit_main(2);
+	map = parse_map(argv, &map_list_ptr);
 	chk_map(map);
 	mlx_call(map);
 	err_exit(map, 0);

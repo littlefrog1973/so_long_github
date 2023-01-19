@@ -11,7 +11,7 @@
                 "libft/libft.a",
                 "-o",
                 "so_long",
-                "-lmlx -lXext -lX11",
+                "-Lmlx_linux -lmlx_Linux -lXext -lX11",
             ],
             "options": {
                 "cwd": "${fileDirname}"

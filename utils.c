@@ -6,11 +6,32 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:49:08 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/16 22:56:15 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:13:14 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	err_exit_main(int err_no)
+{
+	if (err_no == 0)
+		exit (0);
+	if (err_no == 1)
+	{
+		ft_printf("Error\n: Fewer or Many arguments\n");
+		exit (1);
+	}
+	if (err_no == 2)
+	{
+		ft_printf("Error\n: Invalid file name\n");
+		exit (1);
+	}
+	if (err_no == 3)
+	{
+		ft_printf("Error\n: Out of memory\n");
+		exit (1);
+	}
+}
 
 void	err_exit(char **map, int err_no)
 {

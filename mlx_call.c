@@ -6,23 +6,23 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:14:28 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/19 09:54:17 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:16:39 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	init_images(void *mlx, t_window *game)
+void	init_images(void *mlx, t_window *item)
 {
 	t_2d_axis	size;
 
-	(*game).wall.img = mlx_xpm_file_to_image(mlx, TREE, &(size.x), &(size.y));
-	(*game).hero.img = mlx_xpm_file_to_image(mlx, WIZARD, &(size.x), &(size.y));
-	(*game).key.img = mlx_xpm_file_to_image(mlx, KEY, &(size.x), &(size.y));
-	(*game).door.img = mlx_xpm_file_to_image(mlx, DOOR, &(size.x), &(size.y));
-	(*game).tile.img = mlx_xpm_file_to_image(mlx, TILE, &(size.x), &(size.y));
-	if (!(*game).wall.img || !(*game).hero.img || !(*game).key.img
-		|| !(*game).door.img || !(*game).tile.img)
+	(*item).wall.img = mlx_xpm_file_to_image(mlx, TREE, &(size.x), &(size.y));
+	(*item).hero.img = mlx_xpm_file_to_image(mlx, WIZARD, &(size.x), &(size.y));
+	(*item).key.img = mlx_xpm_file_to_image(mlx, KEY, &(size.x), &(size.y));
+	(*item).door.img = mlx_xpm_file_to_image(mlx, DOOR, &(size.x), &(size.y));
+	(*item).tile.img = mlx_xpm_file_to_image(mlx, TILE, &(size.x), &(size.y));
+	if (!(*item).wall.img || !(*item).hero.img || !(*item).key.img
+		|| !(*item).door.img || !(*item).tile.img)
 		ft_so_long_exit(mlx);
 }
 
