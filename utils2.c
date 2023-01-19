@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 22:51:13 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/17 06:33:16 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/19 09:50:41 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,19 @@ void	update_map(t_game *win, t_2d_axis p_pos, int *n_collect, int direction)
 		change_map(win->map, p_pos, direction, 'E');
 	else
 		change_map(win->map, p_pos, direction, '0');
+}
+
+void	map_size(char **map, t_2d_axis *size)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+		i++;
+	j = 0;
+	while (map[0][j])
+		j++;
+	(*size).x = j;
+	(*size).y = i;
 }

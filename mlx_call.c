@@ -6,26 +6,11 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:14:28 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/18 11:56:45 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/19 09:54:17 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	map_size(char **map, t_2d_axis *size)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-		i++;
-	j = 0;
-	while (map[0][j])
-		j++;
-	(*size).x = j;
-	(*size).y = i;
-}
 
 void	init_images(void *mlx, t_window *game)
 {
@@ -44,6 +29,18 @@ void	init_images(void *mlx, t_window *game)
 void	put_image_to_win(void *mlx, void *win, void *img, t_2d_axis pos)
 {
 	mlx_put_image_to_window(mlx, win, img, pos.x * IM_SIZE, pos.y * IM_SIZE);
+}
+
+void	put_number(t_game win)
+{
+	char	*n_move_str;
+
+	n_move_str = ft_itoa(win.n_move);
+	if (!n_move_str)
+		ft_so_long_exit(&win);
+	mlx_string_put(win.mlx, win.mlx_win, (win.size.x - 1) * IM_SIZE - 5,
+		(win.size.y - 1) * IM_SIZE, 0xFEE861, n_move_str);
+	free(n_move_str);
 }
 
 void	put_window(t_game win)
@@ -70,8 +67,7 @@ void	put_window(t_game win)
 		}
 		pos.y++;
 	}
-	mlx_string_put(win.mlx, win.mlx_win, (win.size.x - 1) * IM_SIZE,
-		(win.size.y - 1) * IM_SIZE, 0xFEE861, ft_itoa(win.n_move));
+	put_number(win);
 }
 
 int	mlx_call(char **map)

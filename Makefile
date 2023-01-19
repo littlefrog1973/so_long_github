@@ -6,7 +6,7 @@
 #    By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 12:25:01 by sdeeyien          #+#    #+#              #
-#    Updated: 2023/01/17 13:46:34 by sdeeyien         ###   ########.fr        #
+#    Updated: 2023/01/19 10:07:50 by sdeeyien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-	MLXFLAGS = -lmlx -lXext -lX11
+	MLXFLAGS = -Lmlx_linux -lmlx_Linux -lXext -lX11
 	MLXDIR = mlx_linux
 	LIBMLX = libmlx_Linux
 else
