@@ -6,7 +6,7 @@
 #    By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 12:25:01 by sdeeyien          #+#    #+#              #
-#    Updated: 2023/01/19 10:07:50 by sdeeyien         ###   ########.fr        #
+#    Updated: 2023/01/19 14:23:15 by sdeeyien         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,12 @@ $(NAME): $(OBJ)
 	cd $(LIBDIR) && make
 	cd $(MLXDIR) && make
 	$(CC) -o $@ $(OBJ) $(LIBDIR)/$(LIBDIR).a $(MLXDIR)/$(LIBMLX).a $(MLXFLAGS)
+
+bonus : $(OBJ)
+	cd $(LIBDIR) && make
+	cd $(MLXDIR) && make
+	$(CC) -o $(NAME) $(OBJ) $(LIBDIR)/$(LIBDIR).a $(MLXDIR)/$(LIBMLX).a $(MLXFLAGS)
+
 
 %.o: %.c $(DEPS)
 	$(CC) -c $< $(DEPS) $(CFLAGS)
