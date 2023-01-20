@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 14:49:08 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/19 14:13:14 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/20 09:18:11 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	err_exit_main(int err_no)
 	}
 	if (err_no == 3)
 	{
-		ft_printf("Error\n: Out of memory\n");
+		ft_printf("Error\n: Out of memory or Null map file\n");
 		exit (1);
 	}
 }
