@@ -6,11 +6,17 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 22:51:13 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/19 14:13:32 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/20 08:36:37 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	ft_so_long_end_game(t_game *win)
+{
+	ft_printf("Congratulation!\n");
+	ft_so_long_exit(win);
+}
 
 void	change_map(char **map, t_2d_axis p_pos, int direction, char letter)
 {

@@ -6,7 +6,7 @@
 /*   By: sdeeyien <sukitd@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 15:53:09 by sdeeyien          #+#    #+#             */
-/*   Updated: 2023/01/19 14:13:38 by sdeeyien         ###   ########.fr       */
+/*   Updated: 2023/01/20 08:37:10 by sdeeyien         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_key_input(int key, void *param)
 	else if (key == ESC)
 		ft_so_long_exit(game);
 	if (n_collect == map_collect && check_p_e_pos(pos_exit, game->map))
-		ft_so_long_exit(game);
+		ft_so_long_end_game(game);
 	put_window(*game);
 	return (0);
 }
